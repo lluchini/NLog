@@ -51,7 +51,7 @@ namespace NLog.LayoutRenderers
     {
         private readonly string _baseDir;
 
-#if !SILVERLIGHT && !NETSTANDARD1_3
+#if !NETSTANDARD1_3
         /// <summary>
         /// cached
         /// </summary>
@@ -84,7 +84,7 @@ namespace NLog.LayoutRenderers
         public BaseDirLayoutRenderer(IAppDomain appDomain)
         {
             _baseDir = appDomain.BaseDirectory;
-#if !SILVERLIGHT && !NETSTANDARD1_3
+#if !NETSTANDARD1_3
             _appEnvironment = LogFactory.DefaultAppEnvironment;
 #endif
         }
@@ -95,7 +95,7 @@ namespace NLog.LayoutRenderers
         internal BaseDirLayoutRenderer(IAppEnvironment appEnvironment)
         {
             _baseDir = appEnvironment.AppDomainBaseDirectory;
-#if !SILVERLIGHT && !NETSTANDARD1_3
+#if !NETSTANDARD1_3
             _appEnvironment = appEnvironment;
 #endif
         }
@@ -120,7 +120,7 @@ namespace NLog.LayoutRenderers
         protected override void Append(StringBuilder builder, LogEventInfo logEvent)
         {
             var dir = _baseDir;
-#if !SILVERLIGHT && !NETSTANDARD1_3
+#if !NETSTANDARD1_3
             if (ProcessDir)
             {
                 dir = _processDir ?? (_processDir = GetProcessDir());
@@ -138,7 +138,7 @@ namespace NLog.LayoutRenderers
             }
         }
 
-#if !SILVERLIGHT && !NETSTANDARD1_3
+#if !NETSTANDARD1_3
         private string GetFixedTempBaseDir(string baseDir)
         {
             try
